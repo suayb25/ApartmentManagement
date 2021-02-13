@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ApartmentManagement.Models.Building>
+
+@{
+    ViewBag.Title = "MyBuildings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Buildings</h2>
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://dydturktek.com.tr/images/blog/3999_bina%20kurutma%20cihaz%C4%B1.jpg" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="/Buildings/OwnerBuildingDetails/@item.building_id">@item.name</a>
+                    </h4>
+                    <p class="card-text"><a>Address: </a>@item.address</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="card h-100" style="margin-top:10px;margin-left:15px;">
+        <div class="card-body">
+            <p class="card-text">You can create<br /> a new <b>building</b>.</p>
+            <h4 class="card-title">
+                <a href="/Buildings/OwnerCreate" class="btn btn-primary">Create Building</a>
+                @*<input type='button' class="btn btn-primary" value='Renter Register' onclick='window.location = "@Url.Action("RenterRegister", "Account")";' />*@
+                @*<button href="/Account/RenterRegister" class="btn btn-primary">Renter Register</button>*@
+            </h4>
+
+        </div>
+    </div>
+</div>
+
+

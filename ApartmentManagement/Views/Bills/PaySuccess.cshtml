@@ -1,0 +1,16 @@
+﻿@model ApartmentManagement.Models.Bills
+
+@{
+    ViewBag.Title = "PaySuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PaySuccess</h2>
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>Your payment photo url successfully added. Your home owner can check it. @Model.paid , @Model.photoURL</p>
+    <hr>
+    <p class="mb-0">Enjoy the website. You can go to My Bills Page.</p>
+</div>
+<button type="button" class="btn btn-outline-primary" onclick="location.href='@Url.Action("ApartmentBillings", "Apartments",new {id=Model.apartment_id})'">Go To My Bills Page</button>
+

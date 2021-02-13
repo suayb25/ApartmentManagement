@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ApartmentManagement.Models.Apartment>
+@{
+    ViewBag.Title = "MyApartments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Apartments</h2>
+<div class="row">
+    @{
+        if (@ViewBag.Count == 0)
+        {
+            <div class="card alert-danger" style="margin-left:10px;">
+                <p style="padding-left:10px;padding-right:5px;margin-top:10px;">@ViewBag.Message</p>
+                <a href="/Buildings/OwnerCreate" class="btn btn-primary">Create Building</a>
+            </div>
+        }
+        else if (@ViewBag.Count1 == 0)
+        {
+            <div class="card alert-danger" style="margin-left:10px;">
+                <p style="padding-left:10px;padding-right:5px;margin-top:10px;">@ViewBag.Message1</p>
+            </div>
+        }
+        else
+        {
+            var roles = Roles.GetRolesForUser(Membership.GetUser(User.Identity.Name).UserName);
+            foreach (var item in Model)
+            {
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#"><img class="card-img-top" src="http://dydturktek.com.tr/images/blog/3999_bina%20kurutma%20cihaz%C4%B1.jpg" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a>@item.Building.name</a>
+                            </h4>
+                            <h5><a href="/Apartments/ApartmentBillings/@item.apartment_id">Apart. No: @item.apartment_number</a></h5>
+                            <p class="card-text"><a>Address: </a>@item.Building.address</p>
+                            @if (roles[0] == "Owner")
+                            {
+                                <a href="/Apartments/Details/@item.apartment_id" class="btn btn-primary">Details</a>
+                                <a href="/Apartments/Delete/@item.apartment_id" class="btn btn-danger">Delete</a>
+                            }
+                            else if (roles[0] == "Renter")
+                            {
+                                <a href="/Complaints/Create/@item.apartment_id" class="btn btn-primary">Complaint</a>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            @if (roles[0] == "Owner" && ViewBag.ComplaintCount!=0)
+                            {
+                                <a href="/Complaints/ApartmentComplaintList/@item.apartment_id" class="btn btn-primary">See Complaints</a>
+                            }
+                            else
+                            {
+                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            }          
+            if (roles[0] == "Owner")
+            {
+                <div class="card h-100" style="margin-top:10px;margin-left:15px;">
+                    <div class="card-body">
+                        <p class="card-text">You can create<br /> a new <b>apartment</b>.</p>
+                        <h4 class="card-title">
+                            <a href="/Apartments/Create" class="btn btn-primary">Create Apartment</a>
+                        </h4>
+                    </div>
+                </div>
+            }
+        }
+
+    }
+
+</div>

@@ -1,0 +1,31 @@
+﻿@model ApartmentManagement.Models.Bills
+
+@{
+    ViewBag.Title = "Pay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-auto border border-light">
+    <h2>Pay Apartment No: @Model.apartment.apartment_number</h2>
+    <p>Bill Name: @Model.BillName</p>
+    <p>Bill Date: @Model.date.ToShortDateString()</p>
+    <p>Bill Price: @Model.price</p>
+    <input id="url" type="text" placeholder="Photo URL" onchange="myFunction()" />
+    <div class="mx-sm-3" style="margin-top:10px;">
+        <button class="btn-outline-dark" onclick="btn()">Upload URL</button>
+    </div>
+</div>
+<script>
+        function myFunction() {
+            var x = document.getElementById("url").value;
+            console.log(x);
+    }
+
+    function btn() {
+        var x = document.getElementById("url").value;
+        var url = '@Url.Action("PaySuccess", "Bills")?BillId=' +@Model.bill_id;
+        url += '&photoURL=' + x;
+        window.location.href = url;
+    }
+
+</script>

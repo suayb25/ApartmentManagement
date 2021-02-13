@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ApartmentManagement.Models.Apartment>
+
+@{
+    ViewBag.Title = "BuildingApartments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Building Apartments</h2>
+<div class="row">
+    @{
+        var roles = Roles.GetRolesForUser(Membership.GetUser(User.Identity.Name).UserName);
+        if (Model.Count() != 0)
+        {
+            foreach (var item in Model)
+            {
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a>@item.Building.name</a>
+                            </h4>
+                            <h5><a href="/Apartments/ApartmentBillings/@item.apartment_id">Apart. No: @item.apartment_number</a></h5>
+                            <p class="card-text"><a>Address: </a>@item.Building.address</p>
+                            @if (roles[0] == "Owner")
+                            {
+                                <a href="/Apartments/OwnerApartmentEdit/@item.apartment_id" class="btn btn-primary">Edit</a>
+                                <a href="/Apartments/Delete/@item.apartment_id" class="btn btn-danger">Delete</a>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            if (roles[0] == "Owner")
+            {               
+                <div class="card h-100" style="margin-top:10px;margin-left:15px;">
+                    <div class="card-body">
+                        <p class="alert-danger">You don't have any apartments on <b>@ViewBag.Building</b> building.</p>
+                        <p class="card-text">You can create a new <b>apartment</b>.</p>
+                        <h4 class="card-title">
+                            <a href="/Apartments/Create" class="btn btn-primary">Create Apartment</a>
+                        </h4>
+                    </div>
+                </div>
+            }
+        }
+    }
+
+</div>

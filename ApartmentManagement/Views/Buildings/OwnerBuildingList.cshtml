@@ -1,0 +1,14 @@
+﻿@model IEnumerable<ApartmentManagement.Models.Building>
+
+@{
+    if (Model.Count() != 0)
+    {
+        <h5>Your Buildings</h5>
+    }
+    int i = 1;
+    foreach (var item in Model)
+    {
+        <a href="/Buildings/OwnerBuildingDetails/@item.building_id" class="list-group-item">@i- @item.name</a>
+        i++;
+    }
+} 

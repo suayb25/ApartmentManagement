@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ApartmentManagement.Models.Complaint>
+@{
+    ViewBag.Title = "ApartmentComplaintList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>@ViewBag.BuildingName</h3>
+<h3>Apart. Number: @ViewBag.apartmentNumber Complaint List</h3>
+<hr />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card h-100 alert-danger" style="margin-top:10px;margin-left:15px;">
+            <div class="card-body">
+                <h4 class="card-title">@item.title</h4>
+                <p class="card-text">@item.text</p>
+            </div>
+        </div>
+    }
+</div>

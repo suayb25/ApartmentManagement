@@ -1,0 +1,10 @@
+﻿@model ApartmentManagement.Models.Apartment
+<h1>Building Name: @Model.Building.name</h1>
+<h2>Apart. No: @Model.apartment_number</h2>
+
+<div class="container">
+
+    @Html.Action("ApartmentBillList", "Bills", new { ApartmentID = Model.apartment_id, year=ViewData["year"]});
+
+</div>
+<hr />

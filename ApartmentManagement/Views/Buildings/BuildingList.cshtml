@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ApartmentManagement.Models.Building>
+
+
+@*@foreach (var item in Model)
+{
+<a href="/Buildings/Details/@item.building_id" class="list-group-item">@item.name</a>
+}*@
+
+<div class="card h-100">
+    <div class="card-body">
+        <p class="card-text">You can create<br />a new <b>owner</b> account.</p>
+        <h4 class="card-title">
+            <a href="/Account/OwnerRegister" class="btn btn-primary">Owner Register</a>
+            @*<input type='button' class="btn btn-primary" value='Owner Register' onclick='window.location = "@Url.Action("OwnerRegister", "Account")";' />*@
+            @*<button href="/Account/OwnerRegister" class="btn btn-primary">Owner Register</button>*@
+        </h4>
+
+    </div>
+</div>
+
+<div class="card h-100" style="margin-top:10px;">
+    <div class="card-body">
+        <p class="card-text">You can create<br /> a new <b>renter</b> account.</p>
+        <h4 class="card-title">
+            <a href="/Account/RenterRegister" class="btn btn-primary">Renter Register</a>
+            @*<input type='button' class="btn btn-primary" value='Renter Register' onclick='window.location = "@Url.Action("RenterRegister", "Account")";' />*@
+            @*<button href="/Account/RenterRegister" class="btn btn-primary">Renter Register</button>*@
+        </h4>
+
+    </div>
+</div>
+
